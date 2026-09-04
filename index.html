@@ -4,73 +4,278 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timão News - Notícias do Corinthians</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ==========================================================================
+           1. VARIÁVEIS DE CORES (PADRÃO: MODO CLARO)
+           ========================================================================== */
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #111111;
+            --header-bg: #111111;
+            --header-text: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --badge-bg: #e11919;
+            --badge-text: #ffffff;
+        }
+
+        /* Esconder os inputs que controlam os cliques do usuário */
+        .toggle-input, .reaction-input {
+            display: none !important;
+        }
+
+        /* ==========================================================================
+           2. LÓGICA DO MODO ESCURO (SEM JAVASCRIPT)
+           ========================================================================== */
+        #theme-checkbox:checked ~ .site-wrapper {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #000000;
+            --header-text: #ffffff;
+            --card-bg: #1e1e1e;
+            --card-shadow: rgba(0, 0, 0, 0.6);
+            --badge-bg: #ffffff;
+            --badge-text: #000000;
+        }
+
+        /* Altera dinamicamente o texto do botão de tema */
+        #theme-checkbox:checked ~ .site-wrapper .theme-btn::before {
+            content: "☀️ Modo Claro";
+        }
+        .theme-btn::before {
+            content: "🌙 Modo Escuro";
+        }
+
+        /* ==========================================================================
+           3. ESTILIZAÇÃO VISUAL BASE
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Evita piscar fundo branco ao carregar */
+        }
+
+        .site-wrapper {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: 2px solid var(--header-text);
+            color: var(--header-text);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.2s;
+            display: inline-block;
+            user-select: none;
+        }
+
+        .theme-btn:hover {
+            background-color: var(--header-text);
+            color: var(--header-bg);
+        }
+
+        .news-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+
+        .news-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 15px var(--card-shadow);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Imagens reais configuradas */
+        .news-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            background-color: #333;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-badge {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .news-badge.financeiro {
+            background-color: #b58d15;
+            color: #ffffff;
+        }
+
+        .news-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .news-content p {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ==========================================================================
+           4. SISTEMA DE REAÇÃO INDIVIDUAL (SEM JAVASCRIPT)
+           ========================================================================== */
+        .actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-label {
+            background-color: var(--bg-color);
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .btn-label:hover {
+            filter: brightness(0.9);
+        }
+
+        /* Seletor quando o botão LIKE específico está marcado */
+        #like-1:checked ~ .news-content .actions .label-like-1,
+        #like-2:checked ~ .news-content .actions .label-like-2,
+        #like-3:checked ~ .news-content .actions .label-like-3 {
+            background-color: #2e7d32 !important;
+            color: white !important;
+            border-color: #2e7d32 !important;
+            font-weight: bold;
+        }
+
+        /* Seletor quando o botão DISLIKE específico está marcado */
+        #dislike-1:checked ~ .news-content .actions .label-dislike-1,
+        #dislike-2:checked ~ .news-content .actions .label-dislike-2,
+        #dislike-3:checked ~ .news-content .actions .label-dislike-3 {
+            background-color: #c62828 !important;
+            color: white !important;
+            border-color: #c62828 !important;
+            font-weight: bold;
+        }
+
+        /* Desabilita novos cliques após votar (Simulação de voto final) */
+        #like-1:checked ~ .news-content .actions label, #dislike-1:checked ~ .news-content .actions label,
+        #like-2:checked ~ .news-content .actions label, #dislike-2:checked ~ .news-content .actions label,
+        #like-3:checked ~ .news-content .actions label, #dislike-3:checked ~ .news-content .actions label {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        
+        /* Restaura opacidade do botão selecionado */
+        #like-1:checked ~ .news-content .actions .label-like-1, #dislike-1:checked ~ .news-content .actions .label-dislike-1,
+        #like-2:checked ~ .news-content .actions .label-like-2, #dislike-2:checked ~ .news-content .actions .label-dislike-2,
+        #like-3:checked ~ .news-content .actions .label-like-3, #dislike-3:checked ~ .news-content .actions .label-dislike-3 {
+            opacity: 1 !important;
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Cabeçalho -->
-    <header>
-        <div class="header-container">
-            <h1>🦅 Timão News</h1>
-            <button id="theme-toggle" class="theme-btn">🌙 Modo Escuro</button>
-        </div>
-    </header>
+    <!-- Botão interruptor global do tema colocado antes de tudo no HTML -->
+    <input type="checkbox" id="theme-checkbox" class="toggle-input">
 
-    <!-- Conteúdo Principal -->
-    <main class="news-container">
-        
-        <!-- Notícia 1 -->
-        <article class="news-card">
-            <img src="https://picsum.photos" alt="Aniversário do Corinthians" class="news-img">
-            <div class="news-content">
-                <span class="news-badge">Especiais</span>
-                <h2>Corinthians Celebra 116 Anos de História e Glórias</h2>
-                <p>O Sport Club Corinthians Paulista completou oficialmente 116 anos de fundação. Diversos ídolos e torcedores ao redor do mundo prestaram suas homenagens nas redes sociais.</p>
-                
-                <div class="actions">
-                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
-                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
-                </div>
+    <div class="site-wrapper">
+
+        <!-- Cabeçalho -->
+        <header>
+            <div class="header-container">
+                <h1>🦅 Timão News</h1>
+                <label for="theme-checkbox" class="theme-btn"></label>
             </div>
-        </article>
+        </header>
 
-        <!-- Notícia 2 -->
-        <article class="news-card">
-            <img src="https://picsum.photos" alt="Treino do Corinthians" class="news-img">
-            <div class="news-content">
-                <span class="news-badge">Futebol Masculino</span>
-                <h2>Memphis Depay Acusa Dores e Desfalca Treinamento no CT</h2>
-                <p>O atacante holandês relatou dores no tornozelo esquerdo e realizou trabalhos internos na academia, virando dúvida para os compromissos decisivos do Timão.</p>
+        <!-- Container das Notícias -->
+        <main class="news-container">
+            
+            <!-- Notícia 1 -->
+            <article class="news-card">
+                <!-- Inputs de rádio colocados no topo do card para controle de escopo CSS -->
+                <input type="radio" name="reacao-1" id="like-1" class="reaction-input">
+                <input type="radio" name="reacao-1" id="dislike-1" class="reaction-input">
                 
-                <div class="actions">
-                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
-                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
-                </div>
-            </div>
-        </article>
-
-        <!-- Notícia 3 -->
-        <article class="news-card">
-            <img src="https://picsum.photos" alt="Finanças do Clube" class="news-img">
-            <div class="news-content">
-                <span class="news-badge financeiro">Financeiro</span>
-                <h2>Clube Adia Entrega da Revisão do Orçamento de Finanças</h2>
-                <p>A diretoria corinthiana postergou o envio do documento revisado. O conselho cobra respostas após balanço apontar déficit acumulado no primeiro semestre.</p>
+                <!-- Imagem real temática de futebol/estádio -->
+                <img src="https://unsplash.com" alt="Estádio de Futebol" class="news-img">
                 
-                <div class="actions">
-                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
-                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
-                </div>
-            </div>
-        </article>
-
-    </main>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2026 Timão News - Desenvolvido para a Fiel Torcida.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <div class="news-content">
+                    <span class="news-badge">Especiais</span>
+                    <h2>Corinthians Celebra 116 Anos de História e Glórias</h2>
+                    <p>O Sport Club Corinthians Paulista completou oficialmente seus 116 anos. Ex-jogadores, ídolos históricos e milhões de torcedores ao redor do mundo celebraram a data histórica nas redes sociais destacando a força da Fiel.</p>
+                    
+                    <div class="actions">
+                        <label for="like-1" class="btn-label label-like-1">👍 Curtir</label>
+                        <label for="dislike-1" class="btn-label label-dislike-1">👎 Descurtir</label>
+                    </div>
