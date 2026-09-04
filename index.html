@@ -10,7 +10,6 @@
             --bg-color: #f4f4f9;
             --card-bg: #ffffff;
             --text-color: #111111;
-            --accent-color: #000000;
             --border-color: #e0e0e0;
             --button-bg: #f0f0f0;
             --like-color: #28a745;
@@ -22,7 +21,6 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --text-color: #f4f4f9;
-            --accent-color: #ffffff;
             --border-color: #333333;
             --button-bg: #2d2d2d;
         }
@@ -148,7 +146,7 @@
 
         .btn-action {
             background-color: var(--button-bg);
-            border: none;
+            border: 2px solid transparent;
             color: var(--text-color);
             padding: 0.5rem 1rem;
             border-radius: 5px;
@@ -157,10 +155,24 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: bold;
+            transition: all 0.2s ease;
         }
 
         .btn-like:hover { color: var(--like-color); }
         .btn-dislike:hover { color: var(--dislike-color); }
+
+        /* Estilos quando o botão está ativo (votado) */
+        .btn-like.active {
+            background-color: rgba(40, 167, 69, 0.15);
+            border-color: var(--like-color);
+            color: var(--like-color);
+        }
+
+        .btn-dislike.active {
+            background-color: rgba(220, 53, 69, 0.15);
+            border-color: var(--dislike-color);
+            color: var(--dislike-color);
+        }
 
         /* Rodapé */
         footer {
@@ -188,6 +200,7 @@
             <span class="live-indicator">● AO VIVO</span>
         </div>
 
+        <!-- Notícia 1 -->
         <article class="news-card">
             <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="Estádio de futebol" class="news-image">
             <div class="news-content">
@@ -195,12 +208,13 @@
                 <h3 class="news-title">Corinthians intensifica preparação na Neo Química Arena para o próximo clássico</h3>
                 <p class="news-excerpt">O elenco alvinegro realizou treino tático nesta manhã focando na troca rápida de passes e finalizações. O técnico sinalizou mudanças na equipe titular.</p>
                 <div class="actions">
-                    <button class="btn-action btn-like" onclick="addLike(this)">👍 <span>124</span></button>
-                    <button class="btn-action btn-dislike" onclick="addDislike(this)">👎 <span>12</span></button>
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>124</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>12</span></button>
                 </div>
             </div>
         </article>
 
+        <!-- Notícia 2 -->
         <article class="news-card">
             <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Bola de futebol em campo" class="news-image">
             <div class="news-content">
@@ -208,8 +222,64 @@
                 <h3 class="news-title">Novo reforço do Timão passa por exames médicos antes da assinatura de contrato</h3>
                 <p class="news-excerpt">Atleta desembarcou na capital paulista e se diz pronto para defender a camisa do Time do Povo. Apresentação oficial deve ocorrer no final da tarde.</p>
                 <div class="actions">
-                    <button class="btn-action btn-like" onclick="addLike(this)">👍 <span>310</span></button>
-                    <button class="btn-action btn-dislike" onclick="addDislike(this)">👎 <span>5</span></button>
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>310</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>5</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 3 -->
+        <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80" alt="Torcida no estádio" class="news-image">
+            <div class="news-content">
+                <div class="news-time">Atualizado há 1 hora</div>
+                <h3 class="news-title">Fiel Torcida esgota ingressos para a decisão da próxima semana</h3>
+                <p class="news-excerpt">Em menos de duas horas de vendas abertas, todos os setores da Neo Química Arena foram comercializados. A expectativa é de quebra de recorde de público.</p>
+                <div class="actions">
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>542</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>2</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 4 -->
+        <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80" alt="Chuteira e bola de futebol" class="news-image">
+            <div class="news-content">
+                <div class="news-time">Atualizado há 2 horas</div>
+                <h3 class="news-title">Promessa da base renova contrato com multa rescisória milionária</h3>
+                <p class="news-excerpt">O jovem meio-campista estendeu seu vínculo com o clube até 2028. Diretoria celebrou o acordo e garante proteção contra assédio de clubes europeus.</p>
+                <div class="actions">
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>215</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>8</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 5 -->
+        <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1511295742362-92c96b124e52?auto=format&fit=crop&w=800&q=80" alt="Futebol Feminino" class="news-image">
+            <div class="news-content">
+                <div class="news-time">Atualizado há 3 horas</div>
+                <h3 class="news-title">Brabas do Timão goleiam em clássico e mantêm liderança isolada</h3>
+                <p class="news-excerpt">Com grande exibição coletiva, a equipe feminina do Corinthians venceu mais uma partida com autoridade e se isola na ponta da tabela da competição.</p>
+                <div class="actions">
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>430</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>3</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 6 -->
+        <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80" alt="Refletores do estádio" class="news-image">
+            <div class="news-content">
+                <div class="news-time">Atualizado há 5 horas</div>
+                <h3 class="news-title">Departamento Médico atualiza situação dos lesionados no elenco</h3>
+                <p class="news-excerpt">Boletim divulgado nesta tarde aponta evolução na recuperação do camisa 10, que pode retornar aos gramados antes do prazo inicialmente previsto.</p>
+                <div class="actions">
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>189</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>15</span></button>
                 </div>
             </div>
         </article>
@@ -234,15 +304,54 @@
             }
         }
 
-        // Funções para contadores de Like e Deslike
-        function addLike(button) {
-            const span = button.querySelector('span');
-            span.textContent = parseInt(span.textContent) + 1;
-        }
+        // Lógica de Voto Único (Like / Deslike)
+        function handleVote(button, type) {
+            const actionsContainer = button.parentElement;
+            const likeBtn = actionsContainer.querySelector('.btn-like');
+            const dislikeBtn = actionsContainer.querySelector('.btn-dislike');
+            
+            const likeSpan = likeBtn.querySelector('span');
+            const dislikeSpan = dislikeBtn.querySelector('span');
 
-        function addDislike(button) {
-            const span = button.querySelector('span');
-            span.textContent = parseInt(span.textContent) + 1;
+            let likeCount = parseInt(likeSpan.textContent);
+            let dislikeCount = parseInt(dislikeSpan.textContent);
+
+            const isLiked = likeBtn.classList.contains('active');
+            const isDisliked = dislikeBtn.classList.contains('active');
+
+            if (type === 'like') {
+                if (isLiked) {
+                    // Se já deu like, remove o voto
+                    likeBtn.classList.remove('active');
+                    likeSpan.textContent = likeCount - 1;
+                } else {
+                    // Adiciona o like
+                    likeBtn.classList.add('active');
+                    likeSpan.textContent = likeCount + 1;
+                    
+                    // Se tinha dado deslike antes, remove o deslike
+                    if (isDisliked) {
+                        dislikeBtn.classList.remove('active');
+                        dislikeSpan.textContent = dislikeCount - 1;
+                    }
+                }
+            } else if (type === 'dislike') {
+                if (isDisliked) {
+                    // Se já deu deslike, remove o voto
+                    dislikeBtn.classList.remove('active');
+                    dislikeSpan.textContent = dislikeCount - 1;
+                } else {
+                    // Adiciona o deslike
+                    dislikeBtn.classList.add('active');
+                    dislikeSpan.textContent = dislikeCount + 1;
+
+                    // Se tinha dado like antes, remove o like
+                    if (isLiked) {
+                        likeBtn.classList.remove('active');
+                        likeSpan.textContent = likeCount - 1;
+                    }
+                }
+            }
         }
     </script>
 </body>
