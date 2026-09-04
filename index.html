@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central do Timão - Notícias em Tempo Real</title>
+    <title>Timão Notícias - Atualizado</title>
     <style>
         /* Variáveis de Cores (Modo Claro/Padrão) */
         :root {
             --bg-color: #f4f4f9;
             --card-bg: #ffffff;
             --text-color: #111111;
+            --accent-color: #000000;
             --border-color: #e0e0e0;
             --button-bg: #f0f0f0;
             --like-color: #28a745;
@@ -21,6 +22,7 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --text-color: #f4f4f9;
+            --accent-color: #ffffff;
             --border-color: #333333;
             --button-bg: #2d2d2d;
         }
@@ -189,170 +191,29 @@
 
     <header>
         <div class="logo">
-            <span>🦅</span> Central do Timão
+            <span>🦅</span> Timão Notícias
         </div>
         <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">Modo Escuro 🌙</button>
     </header>
 
     <main>
         <div class="feed-header">
-            <h2>Últimas Notícias</h2>
-            <span class="live-indicator">● AO VIVO</span>
+            <h2>Últimas Novidades</h2>
+            <span class="live-indicator">● AGORA</span>
         </div>
 
-        <!-- Notícia 1 -->
         <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="Estádio de futebol" class="news-image">
+            <img src="https://images.unsplash.com/photo-1570498730906-896ac03ff59f?auto=format&fit=crop&w=800&q=80" alt="Vista da Neo Química Arena" class="news-image">
             <div class="news-content">
-                <div class="news-time">Atualizado há 5 minutos</div>
-                <h3 class="news-title">Corinthians intensifica preparação na Neo Química Arena para o próximo clássico</h3>
-                <p class="news-excerpt">O elenco alvinegro realizou treino tático nesta manhã focando na troca rápida de passes e finalizações. O técnico sinalizou mudanças na equipe titular.</p>
+                <div class="news-time">Atualizado há 1 minuto</div>
+                <h3 class="news-title">Clássico na Arena: Expectativas e Preparação</h3>
+                <p class="news-excerpt">A Neo Química Arena se prepara para receber mais um grande clássico. Saiba como o Timão vem se preparando para garantir a vitória diante da Fiel.</p>
                 <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>124</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>12</span></button>
+                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>155</span></button>
+                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>10</span></button>
                 </div>
             </div>
         </article>
 
-        <!-- Notícia 2 -->
         <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Bola de futebol em campo" class="news-image">
-            <div class="news-content">
-                <div class="news-time">Atualizado há 32 minutos</div>
-                <h3 class="news-title">Novo reforço do Timão passa por exames médicos antes da assinatura de contrato</h3>
-                <p class="news-excerpt">Atleta desembarcou na capital paulista e se diz pronto para defender a camisa do Time do Povo. Apresentação oficial deve ocorrer no final da tarde.</p>
-                <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>310</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>5</span></button>
-                </div>
-            </div>
-        </article>
-
-        <!-- Notícia 3 -->
-        <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80" alt="Torcida no estádio" class="news-image">
-            <div class="news-content">
-                <div class="news-time">Atualizado há 1 hora</div>
-                <h3 class="news-title">Fiel Torcida esgota ingressos para a decisão da próxima semana</h3>
-                <p class="news-excerpt">Em menos de duas horas de vendas abertas, todos os setores da Neo Química Arena foram comercializados. A expectativa é de quebra de recorde de público.</p>
-                <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>542</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>2</span></button>
-                </div>
-            </div>
-        </article>
-
-        <!-- Notícia 4 -->
-        <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80" alt="Chuteira e bola de futebol" class="news-image">
-            <div class="news-content">
-                <div class="news-time">Atualizado há 2 horas</div>
-                <h3 class="news-title">Promessa da base renova contrato com multa rescisória milionária</h3>
-                <p class="news-excerpt">O jovem meio-campista estendeu seu vínculo com o clube até 2028. Diretoria celebrou o acordo e garante proteção contra assédio de clubes europeus.</p>
-                <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>215</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>8</span></button>
-                </div>
-            </div>
-        </article>
-
-        <!-- Notícia 5 -->
-        <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1511295742362-92c96b124e52?auto=format&fit=crop&w=800&q=80" alt="Futebol Feminino" class="news-image">
-            <div class="news-content">
-                <div class="news-time">Atualizado há 3 horas</div>
-                <h3 class="news-title">Brabas do Timão goleiam em clássico e mantêm liderança isolada</h3>
-                <p class="news-excerpt">Com grande exibição coletiva, a equipe feminina do Corinthians venceu mais uma partida com autoridade e se isola na ponta da tabela da competição.</p>
-                <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>430</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>3</span></button>
-                </div>
-            </div>
-        </article>
-
-        <!-- Notícia 6 -->
-        <article class="news-card">
-            <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80" alt="Refletores do estádio" class="news-image">
-            <div class="news-content">
-                <div class="news-time">Atualizado há 5 horas</div>
-                <h3 class="news-title">Departamento Médico atualiza situação dos lesionados no elenco</h3>
-                <p class="news-excerpt">Boletim divulgado nesta tarde aponta evolução na recuperação do camisa 10, que pode retornar aos gramados antes do prazo inicialmente previsto.</p>
-                <div class="actions">
-                    <button class="btn-action btn-like" onclick="handleVote(this, 'like')">👍 <span>189</span></button>
-                    <button class="btn-action btn-dislike" onclick="handleVote(this, 'dislike')">👎 <span>15</span></button>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Central do Timão - Notícias em Tempo Real</p>
-    </footer>
-
-    <script>
-        // Função para alternar entre Modo Claro e Escuro
-        function toggleTheme() {
-            const body = document.documentElement;
-            const themeBtn = document.getElementById('themeBtn');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeBtn.textContent = 'Modo Escuro 🌙';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.textContent = 'Modo Claro ☀️';
-            }
-        }
-
-        // Lógica de Voto Único (Like / Deslike)
-        function handleVote(button, type) {
-            const actionsContainer = button.parentElement;
-            const likeBtn = actionsContainer.querySelector('.btn-like');
-            const dislikeBtn = actionsContainer.querySelector('.btn-dislike');
-            
-            const likeSpan = likeBtn.querySelector('span');
-            const dislikeSpan = dislikeBtn.querySelector('span');
-
-            let likeCount = parseInt(likeSpan.textContent);
-            let dislikeCount = parseInt(dislikeSpan.textContent);
-
-            const isLiked = likeBtn.classList.contains('active');
-            const isDisliked = dislikeBtn.classList.contains('active');
-
-            if (type === 'like') {
-                if (isLiked) {
-                    // Se já deu like, remove o voto
-                    likeBtn.classList.remove('active');
-                    likeSpan.textContent = likeCount - 1;
-                } else {
-                    // Adiciona o like
-                    likeBtn.classList.add('active');
-                    likeSpan.textContent = likeCount + 1;
-                    
-                    // Se tinha dado deslike antes, remove o deslike
-                    if (isDisliked) {
-                        dislikeBtn.classList.remove('active');
-                        dislikeSpan.textContent = dislikeCount - 1;
-                    }
-                }
-            } else if (type === 'dislike') {
-                if (isDisliked) {
-                    // Se já deu deslike, remove o voto
-                    dislikeBtn.classList.remove('active');
-                    dislikeSpan.textContent = dislikeCount - 1;
-                } else {
-                    // Adiciona o deslike
-                    dislikeBtn.classList.add('active');
-                    dislikeSpan.textContent = dislikeCount + 1;
-
-                    // Se tinha dado like antes, remove o like
-                    if (isLiked) {
-                        likeBtn.classList.remove('active');
-                        likeSpan.textContent = likeCount - 1;
-                    }
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+            <img src="https://images
