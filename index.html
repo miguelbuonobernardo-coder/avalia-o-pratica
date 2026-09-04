@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timão News - Notícias do Corinthians</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="header-container">
+            <h1>🦅 Timão News</h1>
+            <button id="theme-toggle" class="theme-btn">🌙 Modo Escuro</button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="news-container">
+        
+        <!-- Notícia 1 -->
+        <article class="news-card">
+            <img src="https://picsum.photos" alt="Aniversário do Corinthians" class="news-img">
+            <div class="news-content">
+                <span class="news-badge">Especiais</span>
+                <h2>Corinthians Celebra 116 Anos de História e Glórias</h2>
+                <p>O Sport Club Corinthians Paulista completou oficialmente 116 anos de fundação. Diversos ídolos e torcedores ao redor do mundo prestaram suas homenagens nas redes sociais.</p>
+                
+                <div class="actions">
+                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
+                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 2 -->
+        <article class="news-card">
+            <img src="https://picsum.photos" alt="Treino do Corinthians" class="news-img">
+            <div class="news-content">
+                <span class="news-badge">Futebol Masculino</span>
+                <h2>Memphis Depay Acusa Dores e Desfalca Treinamento no CT</h2>
+                <p>O atacante holandês relatou dores no tornozelo esquerdo e realizou trabalhos internos na academia, virando dúvida para os compromissos decisivos do Timão.</p>
+                
+                <div class="actions">
+                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
+                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Notícia 3 -->
+        <article class="news-card">
+            <img src="https://picsum.photos" alt="Finanças do Clube" class="news-img">
+            <div class="news-content">
+                <span class="news-badge financeiro">Financeiro</span>
+                <h2>Clube Adia Entrega da Revisão do Orçamento de Finanças</h2>
+                <p>A diretoria corinthiana postergou o envio do documento revisado. O conselho cobra respostas após balanço apontar déficit acumulado no primeiro semestre.</p>
+                
+                <div class="actions">
+                    <button class="btn-like" onclick="handleReaction(this, 'like')">👍 <span class="count">0</span></button>
+                    <button class="btn-dislike" onclick="handleReaction(this, 'dislike')">👎 <span class="count">0</span></button>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Timão News - Desenvolvido para a Fiel Torcida.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
